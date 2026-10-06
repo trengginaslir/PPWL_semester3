@@ -1,8 +1,9 @@
-@extends('layouts.app')
+<!-- <nav>
+    <a href="{{ route('home') }}">Home</a> |
+    <a href="{{ route('about') }}">About</a> |
+    <a href="{{ route('hallo', ['nama' => 'Inas']) }}">Halo Inas</a>
+</nav>
 
-@section('title', 'About - Portfolio')
+<h1>Ini halaman About</h1> -->
 
-@section('content')
-    <h1>Tentang Saya</h1>
-    <p>Saya Sekar, mahasiswa TRPL Universitas Gadjah Mada.</p>
-@endsection
+<h1>Portfolio - About</h1>
