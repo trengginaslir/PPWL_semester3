@@ -1,21 +1,49 @@
-@extends('layouts.app')
+@extends('post.layouts.app')
 
+@section('header', 'Tambah Project')
 @section('content')
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1>Add Project</h1>
-    <form action="{{ route('projects.store') }}" method="POST">
-      @csrf
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title">
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="5" name="description"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+<div class="max-w-2xl mx-auto py-8 px-4">
+    <h1 class="text-2xl font-bold mb-6">Tambah Project</h1>
+
+    <form action="{{ route('post.projects.store') }}"
+          method="POST"
+          enctype="multipart/form-data"
+          class="bg-white p-6 rounded-lg shadow">
+
+        @csrf
+
+        @include('projects._form')
+
+        {{-- Input Thumbnail --}}
+        <div class="mt-4">
+            <label for="thumbnail" class="block font-medium mb-2">
+                Thumbnail Project
+            </label>
+
+            <input
+                type="file"
+                name="thumbnail"
+                id="thumbnail"
+                accept="image/*"
+                class="w-full border rounded p-2"
+            >
+
+            @error('thumbnail')
+                <p class="text-red-500 text-sm mt-1">
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+
+        <div class="mt-6 flex gap-3">
+            <x-primary-button>Simpan</x-primary-button>
+
+            <a href="{{ route('post.projects.index') }}"
+               class="px-4 py-2 text-sm text-gray-600 hover:underline">
+                Batal
+            </a>
+        </div>
+
     </form>
-  </div>
 </div>
 @endsection

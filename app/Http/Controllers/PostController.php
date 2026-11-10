@@ -18,10 +18,18 @@ class PostController extends Controller
             $query->published();
         }
 
-        $posts = $query->latest()->paginate(10)->withQueryString();
+        $perPage = in_array((int) $request->get('per_page'), [5, 10, 25])
+            ? (int) $request->get('per_page')
+            : 10;
+
+        $posts = $query->latest()
+            ->orderBy('id', 'desc')
+            ->paginate($perPage)
+            ->withQueryString();
+
         $totalPosts = Post::count();
 
-        return view('posts.index', compact('posts', 'totalPosts'));
+        return view('posts.index', compact('posts', 'totalPosts', 'perPage'));
     }
 
     public function create()
